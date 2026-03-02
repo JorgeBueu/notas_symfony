@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Nota;
 use App\Repository\NotaRepository;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,5 +44,22 @@ class ConsultasNotaController extends AbstractController
             'notasRecientes' => $notasRecientes,
             'ultimasNotas' => $ultimasNotas,
         ]);
+    }
+
+    #[Route('/nota/crear', name: 'create_nota')]
+    public function createNota(EntityManagerInterface $entityManager): Response
+    {
+        $nota = new Nota();
+        $nota->setTitulo('DAW');
+        $nota->setDescripcion('Nota del ciclo de DAW');
+        $nota->setFechaModificacion(new DateTimeImmutable('now'));
+
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($nota);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Nota guardada con el id: ' . $nota->getId());
     }
 }
