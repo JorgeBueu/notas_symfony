@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<form method="post" action="{{path('nota_guardar')}}"> 
+		<label for="titulo" class="form-label" style="margin-top: 2%">título</label>
+		<input type="text" class="form-control" name="titulo" id="titulo"></input>
+
+        <label for="descripcion" class="form-label" style="margin-top: 2%">descripción</label>
+		<textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+
+		<button type="submit" class="btn btn-primary" style="margin-top: 2%">Enviar</button>
+	</from>
+
+{% endblock %}

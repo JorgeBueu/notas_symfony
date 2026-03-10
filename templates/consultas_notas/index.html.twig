@@ -5,6 +5,8 @@
 {% block body %}
 <h1>Consultas de Notas</h1>
 
+<a class="btn btn-primary" href="{{path('nota_nueva')}}">crear nota</a>
+
 <h2>Nota con ID=1</h2>
 {% if nota1 %}
     <p>{{ nota1.titulo }} - {{ nota1.descripcion }} ({{ nota1.fechaModificacion ? nota1.fechaModificacion|date('Y-m-d H:i') : 'N/A' }})</p>
